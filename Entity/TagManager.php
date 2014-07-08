@@ -67,14 +67,14 @@ class TagManager extends BaseTagManager
             ->getResult()
         ;
 
-        $loadedNames = array();
+        $loadedSlugs = array();
         foreach ($tags as $tag) {
-            $loadedNames[] = $tag->getName();
+            $loadedSlugs[] = $tag->getSlug();
         }
 
-        $missingNames = array_udiff($slugs, $loadedNames, 'strcasecmp');
-        if (sizeof($missingNames)) {
-            foreach ($missingNames as $slug) {
+        $missingSlugs = array_udiff($slugs, $loadedSlugs, 'strcasecmp');
+        if (sizeof($missingSlugs)) {
+            foreach ($missingSlugs as $slug) {
                 $tag = $this->createTag($combine[$slug]);
                 $this->em->persist($tag);
 
