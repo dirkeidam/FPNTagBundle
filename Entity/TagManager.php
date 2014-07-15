@@ -12,7 +12,6 @@ namespace FPN\TagBundle\Entity;
 
 use DoctrineExtensions\Taggable\TagManager as BaseTagManager;
 use Doctrine\ORM\EntityManager;
-use Doctrine\Common\Collections\ArrayCollection;
 use FPN\TagBundle\Util\SlugifierInterface;
 
 class TagManager extends BaseTagManager
@@ -45,7 +44,7 @@ class TagManager extends BaseTagManager
     public function loadOrCreateTags(array $names)
     {
         if (empty($names)) {
-            return new ArrayCollection();
+            return array();
         }
 
         $names     = array_unique($names);
@@ -84,6 +83,6 @@ class TagManager extends BaseTagManager
             $this->em->flush();
         }
 
-        return new ArrayCollection($tags);
+        return $tags;
     }
 }
